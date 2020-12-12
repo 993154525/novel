@@ -96,11 +96,11 @@ if(!token){
 
 
 String.prototype.isPhone = function () {
-    var strTemp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
-    if (strTemp.test(this)) {
-        return true;
-    }
-    return false;
+    // var strTemp = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
+    // if (strTemp.test(this)) {
+    //     return true;
+    // }
+    return true;
 };
 
 String.prototype.isBlank = function () {

@@ -83,7 +83,7 @@ public class LoginController {
     }
 
     public static void main(String[] args) {
-        System.out.println(MD5Util.MD5Encode("ww564654", Charsets.UTF_8.name()));
+        System.out.println(MD5Util.MD5Encode("123456", Charsets.UTF_8.name()));
     }
 
 }

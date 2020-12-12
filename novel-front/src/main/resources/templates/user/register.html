@@ -91,13 +91,13 @@
     $("#btnRegister").click(function () {
         var username = $("#txtUName").val();
         if (username.isBlank()) {
-            $("#LabErr").html("手机号不能为空！");
+            $("#LabErr").html("账号不能为空！");
             return;
         }
-        if (!username.isPhone()) {
-            $("#LabErr").html("手机号格式不正确！");
-            return;
-        }
+        // if (!username.isPhone()) {
+        //     $("#LabErr").html("手机号格式不正确！");
+        //     return;
+        // }
         var password = $("#txtPassword").val();
         if (password.isBlank()) {
             $("#LabErr").html("密码不能为空！");
@@ -116,8 +116,8 @@
             success: function (data) {
                 if (data.code == 200) {
                     $("#LabErr").html(data.msg);
-                    // $.cookie('Authorization', data.data.token, {path: '/'});
-                    // window.location.href = "/";
+                    $.cookie('Authorization', data.data.token, {path: '/'});
+                    window.location.href = "http://shaotian.link:9080/config/login";
                 } else {
                     $("#LabErr").html(data.msg);
                 }

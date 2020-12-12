@@ -80,13 +80,11 @@ public class UserController extends BaseController {
         }
 
         //注册
-//        UserDetails userDetails = userService.register(user);
-//        Map<String, Object> data = new HashMap<>(1);
-//        data.put("token", jwtTokenUtil.generateToken(userDetails));
-//        data.put("暂不开放注册", "需要请联系管理员");
+        UserDetails userDetails = userService.register(user);
+        Map<String, Object> data = new HashMap<>(1);
+        data.put("token", jwtTokenUtil.generateToken(userDetails));
 
-        return ResultBean.registerError();
-
+        return ResultBean.ok();
 
     }
 

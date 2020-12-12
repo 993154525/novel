@@ -29,7 +29,7 @@ public class Interceptor implements HandlerInterceptor {
         String loginUser = (String) request.getSession().getAttribute("username");
         //如果没有 转发到首页登录
         if (loginUser == null) {
-            response.sendRedirect("http://39.102.118.43:9080/config/login");
+            response.sendRedirect("http://shaotian.link:9080/config/login");
 //            request.getRequestDispatcher("config/login").forward(request, response);
             return false;
         } else {
