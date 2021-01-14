@@ -233,9 +233,8 @@
         success: function (data) {
             if (data.code == 200) {
                 if (data.data) {
-                    $("#cFavs").html("<a class=\"btn_ora_white btn_addsj\" href=\"javascript:void(0);\">已在书架</a>");
+                    $("#cFavs").html("<a href=\"javascript:void(0);\" class=\"btn_ora_white btn_addsj\" onclick=\"javascript:BookDetail.AddFavorites(37,0,0);\">移出书架</a>");
                 }
-
 
             } else if (data.code == 1001) {
                 //未登录

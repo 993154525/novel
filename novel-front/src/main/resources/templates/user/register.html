@@ -32,7 +32,7 @@
                 <ul class="log_list">
                     <li><span id="LabErr"></span></li>
                     <li><input name="txtUName" type="text" id="txtUName" class="s_input icon_name"
-                               placeholder="请输入您的手机号码"/></li>
+                               placeholder="请输入您的账户"/></li>
                     <li><input name="txtPassword" type="password" id="txtPassword" class="s_input icon_key"
                                placeholder="请输入密码：6-20位字母/数字"/></li>
                     <li class="log_code cf"><input name="TxtChkCode" type="text" maxlength="4" id="TxtChkCode"
@@ -91,13 +91,9 @@
     $("#btnRegister").click(function () {
         var username = $("#txtUName").val();
         if (username.isBlank()) {
-            $("#LabErr").html("账号不能为空！");
+            $("#LabErr").html("账户不能为空！");
             return;
         }
-        // if (!username.isPhone()) {
-        //     $("#LabErr").html("手机号格式不正确！");
-        //     return;
-        // }
         var password = $("#txtPassword").val();
         if (password.isBlank()) {
             $("#LabErr").html("密码不能为空！");
@@ -115,13 +111,12 @@
             dataType: "json",
             success: function (data) {
                 if (data.code == 200) {
-                    $("#LabErr").html(data.msg);
                     $.cookie('Authorization', data.data.token, {path: '/'});
-                    window.location.href = "http://shaotian.link:9080/config/login";
+                    alert("注册成功")
+                    window.location.href = "/";
                 } else {
                     $("#LabErr").html(data.msg);
                 }
-
             },
             error: function () {
                 layer.alert('网络异常');

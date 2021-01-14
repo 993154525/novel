@@ -202,7 +202,7 @@
         success: function (data) {
             if (data.code == 200) {
                 if (data.data) {
-                    $("#cFavs").html("<button type=\"button\" id=\"cFavs\"  class=\"layui-btn layui-btn-sm layui-btn-radius layui-btn-warm\">已在书架</button>");
+                    $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>移出书架</b></a>");
                 }
 
 
@@ -258,8 +258,11 @@
             dataType: "json",
             success: function (data) {
                 if (data.code == 200) {
-                        $("#cFavs").html("<button type=\"button\" id=\"cFavs\"  class=\"layui-btn layui-btn-sm layui-btn-radius layui-btn-warm\">已在书架</button>");
-
+                    if (data.data){
+                        $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>加入书架</b></a>");
+                    }else {
+                        $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>移出书架</b></a>");
+                    }
 
                 } else if (data.code == 1001) {
                     //未登录

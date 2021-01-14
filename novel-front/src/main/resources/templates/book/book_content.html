@@ -241,7 +241,7 @@
         success: function (data) {
             if (data.code == 200) {
                 if(data.data){
-                    $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\"><b>已收藏</b></a>");
+                    $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,0,0);\"><b>已收藏</b></a>");
                 }
                 //添加阅读记录
                 $.ajax({

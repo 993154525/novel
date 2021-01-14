@@ -29,6 +29,11 @@ public enum ResponseStatus {
     REGISTER_ERROR(200, "暂不开放注册，有需要请联系管理员！"),
 
     /**
+     * 注册成功
+     */
+    REGISTER_SUCCESS(200, "注册成功！"),
+
+    /**
      * 参数错误
      */
     PARAM_ERROR(400, "非法参数！"),

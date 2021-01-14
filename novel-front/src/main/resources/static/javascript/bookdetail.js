@@ -24,12 +24,16 @@
             dataType: "json",
             success: function (data) {
                 if (data.code == 200) {
-                    if (layerStatus == 1) {
-                        $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\"><b>已收藏</b></a>");
-                        jQuery.cookie("u-faorites", "1");
-                    }
-                    else {
-                        $("#cFavs").html("<a class=\"btn_ora_white btn_addsj\" href=\"javascript:void(0);\">已在书架</a>");
+                    if (layerStatus == 1 && data.data) {
+                        $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>加入书架</b></a>");
+                        // jQuery.cookie("u-faorites", "1");
+                    } else if (layerStatus == 1 && data.data) {
+                        $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>移出书架</b></a>");
+                    } else if (data.data) {
+                        $("#cFavs").html("<a class=\"btn_ora_white btn_addsj\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,0,0);\">加入书架</a>");
+                    } else {
+                        $("#cFavs").html("<a class=\"btn_ora_white btn_addsj\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,0,0);\">移出书架</a>");
+
                     }
 
 
@@ -51,7 +55,7 @@
         if (jQuery.cookie("u-faorites") == null) {
         } else {
             if (jQuery.cookie("u-faorites") == "1") {
-                $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\"><b>已加书架</b></a>");
+                $("#cFavs").html("<a class=\"ico_shelf\" href=\"javascript:void(0);\" onclick=\"javascript:BookDetail.AddFavorites(37,1959973,1);\"><b>移出书架</b></a>");
             }
         }
         /*BookDetail.SetWholeTip();*/
@@ -91,7 +95,7 @@
         }
     },
     SaveComment: function (cmtBId, cmtCId, cmtDetail) {
-        if(!isLogin){
+        if (!isLogin) {
             layer.alert('请先登陆');
             return;
         }
@@ -132,8 +136,6 @@
                 layer.alert('网络异常');
             }
         })
-
-
     },
     GetFavoritesBook: function (BId) {
     },
@@ -187,7 +189,7 @@
         localStorage.setItem("fonts", fonts);
         $(".readBox").css("font-size", fonts + "px");
         $("#cFonts").html(fonts);
-        $("#ChapterBody").attr("class","article-content font"+fonts);
+        $("#ChapterBody").attr("class", "article-content font" + fonts);
         BookDetail.reShowCover();
     },
     SetBackUpColor: function (colorNum) {

@@ -76,5 +76,12 @@ public class ResultBean<T> implements Serializable {
     public static ResultBean registerError() {
         return new ResultBean(ResponseStatus.REGISTER_ERROR);
     }
+
+    /**
+     * 成功
+     * */
+    public static ResultBean registerSuccess() {
+        return new ResultBean(ResponseStatus.REGISTER_SUCCESS);
+    }
 }
 

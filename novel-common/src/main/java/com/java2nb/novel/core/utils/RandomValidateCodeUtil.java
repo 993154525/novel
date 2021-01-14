@@ -20,27 +20,29 @@ public class RandomValidateCodeUtil {
 
     /**
      * 放到session中的key
-     * */
+     */
     public static final String RANDOM_CODE_KEY = "randomValidateCodeKey";
+
+
     /**
      * 随机产生只有数字的字符串 private String
-     * */
-    private String randString = "0123456789";
+     */
+    private String randString = "0123456789abcdefghjklmnopqrstuvwxyz";
     /**
      * 图片宽
-     * */
+     */
     private int width = 100;
     /**
      * 图片高
-     * */
+     */
     private int height = 38;
     /**
      * 干扰线数量
-     * */
+     */
     private int lineSize = 40;
     /**
      * 随机产生字符数量
-     * */
+     */
     private int stringNum = 4;
 
     private static final Logger logger = LoggerFactory.getLogger(RandomValidateCodeUtil.class);
@@ -82,7 +84,7 @@ public class RandomValidateCodeUtil {
         g.fillRect(0, 0, width, height);
         //字体大小
         //字体颜色
-        g.setColor(new Color(204,204,204));
+        g.setColor(new Color(204, 204, 204));
         // 绘制干扰线
         for (int i = 0; i <= lineSize; i++) {
             drowLine(g);
@@ -94,7 +96,7 @@ public class RandomValidateCodeUtil {
         }
         logger.info(randomString);
         //将生成的随机字符串保存到缓存中
-        cacheService.set(RANDOM_CODE_KEY,randomString,60*5);
+        cacheService.set(randomString, randomString, 60 * 5);
         g.dispose();
         try {
             // 将内存中的图片通过流动形式输出到客户端
@@ -127,8 +129,8 @@ public class RandomValidateCodeUtil {
         }
         logger.info(randomString);
         //将生成的随机字符串保存到session中
-        session.removeAttribute(RANDOM_CODE_KEY);
-        session.setAttribute(RANDOM_CODE_KEY, randomString);
+        session.removeAttribute(randomString);
+        session.setAttribute(randomString, randomString);
         g.dispose();
         try {
             // 将内存中的图片通过流动形式输出到客户端

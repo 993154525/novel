@@ -66,7 +66,7 @@ public class UserController extends BaseController {
      * 注册
      */
     @PostMapping("register")
-    public ResultBean register(@Valid UserForm user, @RequestParam(value = "velCode", defaultValue = "") String velCode, BindingResult result) {
+    public ResultBean register(@Valid UserForm user, @RequestParam(value = "velCode", defaultValue = "") String velCode, BindingResult result, HttpSession session) {
 
         //判断参数是否合法
         if (result.hasErrors()) {
@@ -75,7 +75,7 @@ public class UserController extends BaseController {
         }
 
         //判断验证码是否正确
-        if (!velCode.equals(cacheService.get(RandomValidateCodeUtil.RANDOM_CODE_KEY))) {
+        if (!velCode.equals(cacheService.get(velCode))) {
             return ResultBean.fail(ResponseStatus.VEL_CODE_ERROR);
         }
 
@@ -84,7 +84,10 @@ public class UserController extends BaseController {
         Map<String, Object> data = new HashMap<>(1);
         data.put("token", jwtTokenUtil.generateToken(userDetails));
 
-        return ResultBean.ok();
+        session.setAttribute("username", user.getUsername());
+        session.setMaxInactiveInterval(24 * 60 * 60);
+
+        return ResultBean.ok(data);
 
     }
 
@@ -131,8 +134,14 @@ public class UserController extends BaseController {
         if (userDetails == null) {
             return ResultBean.fail(ResponseStatus.NO_LOGIN);
         }
-        userService.addToBookShelf(userDetails.getId(), bookId, preContentId);
-        return ResultBean.ok();
+        Boolean aBoolean = userService.queryIsInShelf(userDetails.getId(), bookId);
+        if (aBoolean) {
+            userService.removeFromBookShelf(userDetails.getId(), bookId);
+        } else {
+            userService.addToBookShelf(userDetails.getId(), bookId, preContentId);
+        }
+
+        return ResultBean.ok(aBoolean);
     }
 
     /**
